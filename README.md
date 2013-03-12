@@ -1,20 +1,20 @@
-= xlossage, display pressed keys in X11 in a readable way
+# xlossage, display pressed keys in X11 in a readable way
 
 xlossage is a tool to display X11 keypresses in an Emacs-like manner
 (cf. M-x view-lossage).  It's primary use is to support screencasts.
 
 NOTE: The xlossage output can contain sensitive information.  Use with care.
 
-== Limitations
+## Limitations
 
-- Hardcoded modifier masks (can this be done without mind reading?)
+* Hardcoded modifier masks (can this be done without mind reading?)
 
-== Copyright
+## Copyright
 
 xlossage contains parts lifted from xorg-xinput:
 
-Copyright 1996 by Frederic Lepied, France. <Frederic.Lepied@sugix.frmug.org>
-Copyright 2013 by Christian Neukirchen <http://purl.org/net/chneukirchen>
+Copyright 1996 by Frederic Lepied, France. <Frederic.Lepied@sugix.frmug.org>  
+Copyright 2013 by Christian Neukirchen <http://purl.org/net/chneukirchen>  
 
 Permission to use, copy, modify, distribute, and sell this software and its
 documentation for any purpose is  hereby granted without fee, provided that
