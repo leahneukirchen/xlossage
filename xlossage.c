@@ -36,6 +36,9 @@
 #include <X11/extensions/XI.h>
 #include <X11/Xutil.h>
 
+// last keypress *displayed*
+long last_time = 0;
+
 // from Plan9
 enum
 {
@@ -61,7 +64,7 @@ enum
 
 
 void
-putkeysym(KeySym keysym, int state)
+putkeysym(KeySym keysym, int state, long time)
 {
   long c = 0;
 
@@ -134,6 +137,12 @@ putkeysym(KeySym keysym, int state)
            (char) (Tx | ((c >> 1*Bitx) & Maskx)),
            (char) (Tx | (c & Maskx)));
   }
+
+  if (time - last_time > TIMEOUT)
+    printf("\n");
+
+  fflush(stdout);
+  last_time = time;
 } 
 
 int
@@ -142,7 +151,6 @@ main(int argc, char *argv[])
     Display *display;
     int event, error, i, d, xi_opcode;
     int key_press_type = -1;
-    long last_time = 0;
 
     int number = 0;	/* number of events registered */
     XEventClass event_list[7];
@@ -222,12 +230,7 @@ main(int argc, char *argv[])
         //keysym = XLookupKeysym(&xevent, key->state);
         //keysym = XKeycodeToKeysym(display, key->keycode, 0);
 
-        if (key->time - last_time > TIMEOUT)
-          printf("\n");
-        putkeysym(keysym, key->state);
-        fflush(stdout);
-
-        last_time = key->time;
+        putkeysym(keysym, key->state, key->time);
       }
     }
     
