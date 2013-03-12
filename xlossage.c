@@ -90,6 +90,9 @@ putkeysym(KeySym keysym, int state, long time)
     return;
   }  
 
+  if (time - last_time > TIMEOUT)
+    printf("\n");
+
   state &= ~8192;  // clear ISO_Group_Shift
 
   if ((keysym >= 33 && keysym <= 126) || (keysym >= 161 && keysym <= 255)
@@ -138,9 +141,6 @@ putkeysym(KeySym keysym, int state, long time)
            (char) (Tx | ((c >> 1*Bitx) & Maskx)),
            (char) (Tx | (c & Maskx)));
   }
-
-  if (time - last_time > TIMEOUT)
-    printf("\n");
 
   fflush(stdout);
   last_time = time;
