@@ -26,6 +26,9 @@
  *
  */
 
+// milliseconds between keypresses to make a newline appear
+#define TIMEOUT 1000
+
 #include <stdio.h>
 
 #include <X11/Xlib.h>
@@ -208,7 +211,7 @@ main(int argc, char *argv[])
         //keysym = XLookupKeysym(&xevent, key->state);
         //keysym = XKeycodeToKeysym(display, key->keycode, 0);
 
-        if (key->time - last_time > 1000)
+        if (key->time - last_time > TIMEOUT)
           printf("\n");
         putkeysym(keysym, key->state);
         fflush(stdout);
