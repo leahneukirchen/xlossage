@@ -60,7 +60,7 @@ enum
 void
 putkeysym(KeySym keysym, int state)
 {
-  long c;
+  long c = 0;
 
   switch (keysym) {
   case XK_Shift_L:
@@ -85,35 +85,30 @@ putkeysym(KeySym keysym, int state)
 
   state &= ~8192;  // clear ISO_Group_Shift
 
-  if (state > 0) {
-    if (state & (ControlMask | Mod1Mask | Mod4Mask)) {
-      if (state & ShiftMask)   printf("S");
-      if (state & ControlMask) printf("C");
-      if (state & Mod1Mask)    printf("M");
-      if (state & Mod4Mask)    printf("W");
-      printf("-");
-    }
+  if ((keysym >= 33 && keysym <= 126) || (keysym >= 161 && keysym <= 255)
+      || (keysym >= 0x01000100 && keysym <= 0x0110ffff)) {
+    // Mapped Latin1 or Unicode
+    c = keysym & ~0x1000000;
+    if (state == ShiftMask)     // No S- on plain letters.
+      state = 0;
   }
 
-  if ((keysym >= 33 && keysym <= 126) || (keysym >= 161 && keysym <= 255)) {
-    // Mapped Latin1
-    c = keysym;
-  } else if (keysym >= 0x01000100 && keysym <= 0x0110ffff) {
-    // Mapped Unicode
-    c = keysym & ~0x1000000;
-  } else {
+  if (state & (ShiftMask | ControlMask | Mod1Mask | Mod4Mask)) {
+    if (state & ShiftMask)   printf("S");
+    if (state & ControlMask) printf("C");
+    if (state & Mod1Mask)    printf("M");
+    if (state & Mod4Mask)    printf("W");
+    printf("-");
+  }
+
+  if (!c) {
     switch (keysym) {
     case XK_space:     printf("SPC "); break;
     case XK_Return:    printf("RET "); break;
     case XK_BackSpace: printf("DEL "); break;
     default:           printf("%s ", XKeysymToString(keysym));  // Readable name
     }
-    return;
-  }
-
-  // Else, generate UTF-8.
-
-  if (c <= Rune1) {
+  } else if (c <= Rune1) {      // Else, generate UTF-8.
     printf("%c ", 
            (char) c);
   } else if (c <= Rune2) {
