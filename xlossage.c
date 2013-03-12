@@ -96,20 +96,31 @@ putkeysym(KeySym keysym, int state)
       state = 0;                // No S- on plain letters.
   }
 
-  if (state & (ShiftMask | ControlMask | Mod1Mask | Mod4Mask)) {
-    if (state & ShiftMask)   printf("S");
-    if (state & ControlMask) printf("C");
-    if (state & Mod1Mask)    printf("M");
-    if (state & Mod4Mask)    printf("W");
-    printf("-");
-  }
+  if (!c)
+    switch (keysym) {
+    case XK_BackSpace: break;
+    case XK_Escape:    break;
+    case XK_Linefeed:  break;
+    case XK_Return:    break;
+    case XK_Tab:       break;
+    case XK_space:     break;
+    default:           printf("<");
+    }
+
+  if (state & ShiftMask)   printf("S-");
+  if (state & ControlMask) printf("C-");
+  if (state & Mod1Mask)    printf("M-");
+  if (state & Mod4Mask)    printf("W-");
 
   if (!c) {
     switch (keysym) {
-    case XK_space:     printf("SPC "); break;
-    case XK_Return:    printf("RET "); break;
     case XK_BackSpace: printf("DEL "); break;
-    default:           printf("%s ", XKeysymToString(keysym));  // Readable name
+    case XK_Escape:    printf("ESC "); break;
+    case XK_Linefeed:  printf("LFD "); break;
+    case XK_Return:    printf("RET "); break;
+    case XK_Tab:       printf("TAB "); break;
+    case XK_space:     printf("SPC "); break;
+    default:           printf("%s> ", XKeysymToString(keysym));  // Readable name
     }
   } else if (c <= Rune1) {      // Else, generate UTF-8.
     printf("%c ", 
