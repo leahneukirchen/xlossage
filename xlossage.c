@@ -78,6 +78,7 @@ putkeysym(KeySym keysym, int state)
   case XK_Hyper_L:
   case XK_Hyper_R:
   case XK_Mode_switch:
+  case XK_ISO_Level3_Shift:
     // ignore
     return;
   }  
