@@ -1,7 +1,7 @@
 # xlossage, display pressed keys in X11 in a readable way
 
 xlossage is a tool to display X11 keypresses in an Emacs-like manner
-(cf. M-x view-lossage).  It's primary use is to support screencasts.
+(cf. M-x view-lossage).  Its primary use is to support screencasts.
 
 NOTE: The xlossage output can contain sensitive information.  Use with care.
 
