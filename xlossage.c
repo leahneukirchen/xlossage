@@ -89,8 +89,8 @@ putkeysym(KeySym keysym, int state)
       || (keysym >= 0x01000100 && keysym <= 0x0110ffff)) {
     // Mapped Latin1 or Unicode
     c = keysym & ~0x1000000;
-    if (state == ShiftMask)     // No S- on plain letters.
-      state = 0;
+    if ((state & (ShiftMask | ControlMask | Mod1Mask | Mod4Mask)) == ShiftMask)
+      state = 0;                // No S- on plain letters.
   }
 
   if (state & (ShiftMask | ControlMask | Mod1Mask | Mod4Mask)) {
