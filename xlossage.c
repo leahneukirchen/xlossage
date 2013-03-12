@@ -5,6 +5,7 @@
 /* Parts lifted from xorg-xinput:
  *
  * Copyright 1996 by Frederic Lepied, France. <Frederic.Lepied@sugix.frmug.org>
+ * Copyright 2013 by Christian Neukirchen <http://purl.org/net/chneukirchen>
  *
  * Permission to use, copy, modify, distribute, and sell this software and its
  * documentation for any purpose is  hereby granted without fee, provided that
