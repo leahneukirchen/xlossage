@@ -1,5 +1,5 @@
-CFLAGS=-O2 -Wall -g
-LDFLAGS=-lX11 -lXi
+CFLAGS=-O2 -Wall -g `pkg-config --cflags x11 xi`
+LDFLAGS=`pkg-config --libs x11 xi`
 
 all: xlossage
 
