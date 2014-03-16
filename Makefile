@@ -1,3 +1,4 @@
+CC=gcc
 CFLAGS=-O2 -Wall -g
 LDFLAGS=-lX11 -lXi
 
