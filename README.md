@@ -14,7 +14,7 @@ NOTE: The xlossage output can contain sensitive information.  Use with care.
 xlossage contains parts lifted from xorg-xinput:
 
 Copyright 1996 by Frederic Lepied, France. <Frederic.Lepied@sugix.frmug.org>  
-Copyright 2013 by Christian Neukirchen <http://purl.org/net/chneukirchen>  
+Copyright 2013, 2025 by Leah Neukirchen <leah@vuxu.org>  
 
 Permission to use, copy, modify, distribute, and sell this software and its
 documentation for any purpose is  hereby granted without fee, provided that
